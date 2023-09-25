@@ -1,13 +1,14 @@
 <template>
-  <h1>Home!</h1>
-    <div class="btn btn-primary">
-        Home
-    </div>
+  <Headline/>
 </template>
 
 <script>
+import Headline from "../src/components/Headline.vue";
+
 export default {
-    name: "Home"
+    components: {
+        Headline
+    }
 }
 </script>
 
