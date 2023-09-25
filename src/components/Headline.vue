@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/scss/main";
+@import "~/scss/main";
 
 .container {
   padding-top: 40px;
