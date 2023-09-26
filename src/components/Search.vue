@@ -1,34 +1,34 @@
 <template>
   <div class="container">
     <input
-      v-model="title"
-      class="form-control"
-      type="text"
-      placeholder="Search for Movies, Series & more"
-      @keyup.enter="apply"
+        v-model="title"
+        class="form-control"
+        type="text"
+        placeholder="Search for Movies, Series & more"
+        @keyup.enter="apply"
     />
     <div class="selects">
       <!-- v-model은 $data로 아래 data()에 접근해서 데이터를 표시할 수 있음. -->
       <select
-        v-for="filter in filters"
-        :key="filter.name"
-        v-model="$data[filter.name]"
-        class="form-select">
+          v-for="filter in filters"
+          :key="filter.name"
+          v-model="$data[filter.name]"
+          class="form-select">
         <option
-          v-if="filter.name === 'year'"
-          value="">
+            v-if="filter.name === 'year'"
+            value="">
           All Years
         </option>
         <option
-          v-for="item in filter.items"
-          :key="item">
+            v-for="item in filter.items"
+            :key="item">
           {{ item }}
         </option>
       </select>
     </div>
 
     <button class="btn btn-primary" @click="apply">
-        Apple
+      Apply
     </button>
   </div>
 </template>
@@ -69,13 +69,14 @@ export default {
   },
   methods: {
     async apply() {
-        // movie.js 에 searchMovies 로 접근.
-        this.$store.dispatch('movie/searchMovies', {
-            title: '',
-            type: '',
-            number: '',
-            year: ''
-        });
+      // movie.js 에 searchMovies 로 title, type, number, year 데이터 전달.
+      // dispatch : 발송하다.
+      this.$store.dispatch('movie/searchMovies', {
+        title: this.title,
+        type: this.type,
+        number: this.number,
+        year: this.year
+      });
     }
   }
 }
@@ -89,6 +90,7 @@ export default {
   > * {
     margin-right: 10px;
     font-size: 15px;
+
     &:last-child {
       margin-right: 0;
     }
@@ -96,9 +98,11 @@ export default {
 
   .selects {
     display: flex;
+
     select {
       width: 120px;
       margin-right: 10px;
+
       &:last-child {
         margin-right: 0;
       }
