@@ -5,6 +5,7 @@
       class="form-control"
       type="text"
       placeholder="Search for Movies, Series & more"
+      @keyup.enter="apply"
     />
     <div class="selects">
       <!-- v-model은 $data로 아래 data()에 접근해서 데이터를 표시할 수 있음. -->
@@ -25,10 +26,15 @@
         </option>
       </select>
     </div>
+
+    <button class="btn btn-primary" @click="apply">
+        Apple
+    </button>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -60,6 +66,17 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    async apply() {
+        // movie.js 에 searchMovies 로 접근.
+        this.$store.dispatch('movie/searchMovies', {
+            title: '',
+            type: '',
+            number: '',
+            year: ''
+        });
+    }
   }
 }
 </script>
@@ -86,6 +103,14 @@ export default {
         margin-right: 0;
       }
     }
+  }
+
+  .btn {
+    width: 120px;
+    height: 50px;
+    font-weight: 700;
+    // flex에서 공간이 부족할 때 줄어드는 비율. 0으로 설정하면 줄어 들지 않는다.
+    flex-shrink: 0;
   }
 }
 </style>
