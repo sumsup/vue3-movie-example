@@ -12,9 +12,9 @@ export default {
     // computed!
     getters: {
         // 바로 위 state 속성.
-        movieIds(state) {
-            return state.movies.map(m => m.imdbID);
-        }
+        // movieIds(state) {
+        //     return state.movies.map(m => m.imdbID);
+        // }
     },
     // methods!
     // 변이. 여기에서만 데이터 변경 가능.
@@ -39,12 +39,14 @@ export default {
 
         // 위 코드를 객체구조분해를 통해서 아래에서 처럼 간단하게 표현 가능.
         async searchMovies(context, payload) {
-            const { title, type, number, year} = payload;
+            const { title, type, number, year } = payload;
             const OMDB_API_KEY = '7035c60c';
 
-            const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${this.title}&type=${this.type}&y=${this.year}&page=1`);
+            const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=1`);
             const { Search, totalResult } = res.data;
-            // mutations 에 있는 updateState를 호출하면서 payload를 넘겨줌.
+
+            // mutations에 있는 updateState를 호출하면서 payload를 넘겨줌.
+            // 구조분해로 context 에서 { commit } 만 꺼내서 사용가능.
             context.commit('updateState', {
                 movies: Search,
                 message: 'Hello world!',
