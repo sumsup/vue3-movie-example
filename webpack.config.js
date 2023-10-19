@@ -32,7 +32,7 @@ module.exports = {
     clean: true
   },
 
-  // 모듈 처리 방식을 설정
+  // 모듈 처리 방식을 설정. 특정 확장자의 파일을 어떤 loader로 처리할 것 인지.
   module: {
     rules: [
       {
@@ -47,7 +47,12 @@ module.exports = {
           'style-loader',
           'css-loader',
           'postcss-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: '@import "~/scss/main";'
+            }
+          }
         ]
       },
       {

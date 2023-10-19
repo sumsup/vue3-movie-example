@@ -34,7 +34,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -115,6 +114,24 @@ export default {
     font-weight: 700;
     // flex에서 공간이 부족할 때 줄어드는 비율. 0으로 설정하면 줄어 들지 않는다.
     flex-shrink: 0;
+  }
+
+  @include media-breakpoint-down(lg) {
+    display: block;
+    input {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .selects {
+      margin-right: 0;
+      margin-bottom: 10px;
+      select {
+        width: 100%;
+      }
+    }
+    .btn {
+      width: 100%;
+    }
   }
 }
 </style>

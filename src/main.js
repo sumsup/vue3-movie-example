@@ -4,8 +4,10 @@ import App from './App.vue';
 // import router from '../routes'; <--- 하면 index.js 를 import 함.
 import router from '../routes/index.js';
 import store from './store/index.js';
+import loadImage from './plugins/loadImage';
 
 createApp(App)
-    .use(router)
-    .use(store)
+    .use(router) // $route
+    .use(store) // $store
+    .use(loadImage) // $loadImage
     .mount('#app');
