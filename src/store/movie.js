@@ -1,13 +1,15 @@
 import axios from "axios";
 import _uniqBy from 'lodash/uniqBy';
 
+const _defaultMessage = 'Search for the movie title!';
+
 export default {
     // module!
     namespaced: true,
     // data!
     state: () => ({
         movies: [],
-        message: 'Search for the movie title!',
+        message: _defaultMessage,
         loading: false,
         theMovie: {}
     }),
@@ -23,12 +25,16 @@ export default {
     mutations: {
         updateState(state, payload) {
             // ['movies', 'message', 'loading']
+            // payload의 모든 key 값을 돌아가면서 state의 key 값에 해당하는 value로 복사.
+            // state의 movies, message, loading 으로 복사하는 작업을 함.
             Object.keys(payload).forEach(key => {
                 state[key] = payload[key];
             })
         },
         resetMovies(state) {
             state.movies = [];
+            state.message = _defaultMessage;
+            state.loading = false;
         }
     },
     // actions 함수는 기본적으로 비동기. async await 가 기본적용 되 있음.
@@ -97,6 +103,7 @@ export default {
                             // ... <-- 배열 전개 연산자.
                             movies: [
                                 ...state.movies,
+                                // 중복되는 imdbID 값은 lodash._uniqBy로 제거.
                                 ..._uniqBy(Search, "imdbID")
                             ]
                         })
